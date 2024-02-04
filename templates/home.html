@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artwork Sharing</title>
+</head>
+<body>
+    <h1>Upload Artwork</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        Title: <input type="text" name="title" required><br>
+        Image: <input type="file" name="file" accept="image/*" required><br>
+        <input type="submit" value="Upload">
+    </form>
+    <h2>Artwork Gallery</h2>
+    {% for artwork in artworks %}
+        <div>
+            <h3>{{ artwork.title }}</h3>
+            <a href="{{ url_for('artwork', artwork_id=artwork.id) }}">
+                <img src="{{ url_for('uploaded_file', filename=artwork.image_filename) }}" width="300">
+            </a>
+        </div>
+    {% endfor %}
+</body>
+</html>
